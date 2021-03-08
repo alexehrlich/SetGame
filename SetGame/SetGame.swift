@@ -42,6 +42,7 @@ struct SetGame {
             if selectedCards.count == 3{
                 
                 let checkForSetResult = checkForMatch(for: selectedCards)
+                
                 if checkForSetResult == true {
                     
                     successfulSetinGame = true
@@ -74,7 +75,7 @@ struct SetGame {
                 chosenCard.isSelected = true
                 selectedCards.insert(chosenCard)
             }else{
-                addNewCards()
+                updateCards()
             }
         }
     }
@@ -103,6 +104,40 @@ struct SetGame {
                 }
             }
         }
+    }
+    
+    mutating func resetAllCards(){
+        
+        selectedCards.removeAll()
+        
+        cardsInGame.forEach(){
+            $0.isHinted = false
+            $0.isSelected = false
+        }
+    }
+    
+    mutating func removeSelectedCards(){
+        for card in selectedCards{
+            cardsInGame.remove(at: cardsInGame.firstIndex(of: card)!)
+        }
+        searchForSetOnDeck()
+        successfulSetinGame = false
+        selectedCards.removeAll()
+    }
+    
+    mutating func shuffleGame(){
+        
+        let count = cardsInGame.count
+        resetAllCards()
+        cards += cardsInGame
+        cards.shuffle()
+        cardsInGame.removeAll()
+        
+        for _ in 1...count{
+            cardsInGame.append(cards.remove(at: 0))
+        }
+        
+        searchForSetOnDeck()
     }
     
     mutating func makeHint(){
@@ -136,7 +171,6 @@ struct SetGame {
                         (firstCard.sign.shading != secondCard.sign.shading && firstCard.sign.shading != thirdCard.sign.shading && secondCard.sign.shading != thirdCard.sign.shading) {
                         if (firstCard.numberOfSigns == secondCard.numberOfSigns && firstCard.numberOfSigns == thirdCard.numberOfSigns) ||
                             (firstCard.numberOfSigns != secondCard.numberOfSigns && firstCard.numberOfSigns != thirdCard.numberOfSigns && secondCard.numberOfSigns != thirdCard.numberOfSigns) {
-                            print("MATCH")
                             return true
                         }
                     }
@@ -147,13 +181,12 @@ struct SetGame {
     }
     
     //Wenn schon drei Karten ausgewählt sind, ersetz die passenden oder füge solange 3 neue hinzu
-    mutating func addNewCards() {
+    mutating func updateCards() {
     
         cardsInGame.forEach{$0.isHinted = false}
         
         //Wenn ein Set vorliegt ersetze die gematchten Karten durch drei neue
         if successfulSetinGame {
-            
             successfulSetinGame = false
             
             if cards.count > 0 && cardsInGame.count <= 12{
@@ -171,21 +204,16 @@ struct SetGame {
                 }
             }
         }else{
-            if cardsInGame.count < 24 {
                 for card in cardsInGame{
                     card.isSelected = false
                 }
                 
                 for _ in 0...2{
                     let card = cards.remove(at: 0)
-                    card.isVisible = true
                     cardsInGame.append(card)
                 }
-            }
         }
-        
         searchForSetOnDeck()
-        
         selectedCards.removeAll()
     }
     
@@ -193,11 +221,11 @@ struct SetGame {
     init(){
         
         //Für die Anzahl, Zeichen, Farbe und Füllung durchlaufen und in jeder Kombination eine Karte erstellen. Hier werden alle Karten erstellt
-        for i in 1...3 {
-            for j in 1...3 {
-                for k in 1...3 {
+        for shape in CardSign.Shape.allShapes {
+            for color in CardSign.Color.allColors {
+                for shading in CardSign.Shading.allShadings{
                     for v in 1...3{
-                        let card = Card(sign: CardSign.init(shape: Shape(rawValue: j)!, shading: Shading(rawValue: k)!, color: Color(rawValue: v)!), numberOfSigns: i)
+                        let card = Card(sign: CardSign(shape: shape, shading: shading, color: color), numberOfSigns: v)
                         cards.append(card)
                         cards.shuffle()
                     }

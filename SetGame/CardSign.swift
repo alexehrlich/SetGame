@@ -13,25 +13,33 @@ struct CardSign {
     private (set) var shape: Shape
     private (set) var shading: Shading
     private (set) var color: Color
+    
+    enum Shape: Int{
+        
+        case diamond = 1
+        case oval
+        case squiggle
+        
+        static var allShapes = [Shape.diamond, .oval, .squiggle]
+    }
+
+    enum Shading: Int {
+        
+        case filled = 1
+        case empty
+        case striped
+        
+        static var allShadings = [Shading.empty, .filled, .striped]
+    }
+
+    enum Color: Int {
+        
+        case purple = 1
+        case red
+        case green
+        
+        static var allColors = [Color.purple, .red, .green]
+    }
 }
 
-enum Shape: Int{
-    
-    case circle = 1
-    case triangle
-    case square
-}
 
-enum Shading: Int {
-    
-    case filled = 1
-    case empty
-    case striped
-}
-
-enum Color: Int {
-    
-    case blue = 1
-    case red
-    case green
-}

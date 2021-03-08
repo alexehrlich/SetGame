@@ -8,8 +8,15 @@
 
 import Foundation
 
-class Card: Hashable {
+class Card: Hashable, CustomStringConvertible {
     
+    var description: String{
+        
+        return "number: \(numberOfSigns); Sign: \(sign.shape); Shading: \(sign.shading); Color: \(sign.color)"
+        
+    }
+    
+
     var hashValue: Int {
         return identifier
     }
