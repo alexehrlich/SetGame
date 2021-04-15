@@ -11,7 +11,6 @@ import UIKit
 class CardCellView: UIView {
     
     var sign: CardSign?
-    let path = UIBezierPath()
     
     var signColor: UIColor{
         switch sign!.color{
@@ -23,6 +22,8 @@ class CardCellView: UIView {
     
     
     override func draw(_ rect: CGRect) {
+        
+        let path = UIBezierPath()
 
         //contentMode = .redraw
         //Draw the Path
@@ -60,7 +61,7 @@ class CardCellView: UIView {
                 
             case .striped:
                 strokePath(path, with: currentSign.color)
-                stripeShape()
+                stripeShape(path)
             }
             
 
@@ -80,7 +81,7 @@ class CardCellView: UIView {
         path.fill()
     }
     
-    func stripeShape(){
+    func stripeShape(_ path: UIBezierPath){
         
         path.addClip()
         let delta = bounds.width / 20

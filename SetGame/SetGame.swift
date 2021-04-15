@@ -16,7 +16,9 @@ struct SetGame {
     private (set) var successfulSetinGame = false
     private (set) var setsOnDeck = [Set<Card>]()
     
-    
+    var newCards = [Card]()
+    var matchingIndices = [Int]()
+
     var score = 0
     
     mutating func chooseCard(at index: Int) {
@@ -65,8 +67,11 @@ struct SetGame {
                     }
                 }
             }
-        }else{
+        }else{//Wenn 3 Karten ausgewählt sind
+            
+            //Wenn kein Set mit den ausgewählten Karten vorliegt, dann setze alles zurück
             if successfulSetinGame == false {
+                
                 for card in selectedCards {
                     card.isSelected = false
                     card.matchState = nil
@@ -75,7 +80,7 @@ struct SetGame {
                 chosenCard.isSelected = true
                 selectedCards.insert(chosenCard)
             }else{
-                updateCards()
+                //updateCards()
             }
         }
     }
@@ -113,6 +118,7 @@ struct SetGame {
         cardsInGame.forEach(){
             $0.isHinted = false
             $0.isSelected = false
+            $0.matchState = nil
         }
     }
     
@@ -179,43 +185,79 @@ struct SetGame {
         }
         return false
     }
+
     
-    //Wenn schon drei Karten ausgewählt sind, ersetz die passenden oder füge solange 3 neue hinzu
+    //Füge 3 Karten am Ende der bestehenden Karten hinzu
+    mutating func addNewCards(){
+        if cards.count > 0 {
+            newCards.removeAll()
+            for _ in 0...2{
+                let newCard = cards.remove(at: 0)
+                cardsInGame.append(newCard)
+                newCards.append(newCard)
+            }
+        }
+        
+        print("CARDS Added")
+        cardsInGame.forEach({print($0)})
+        print("\n")
+    }
+    
+
+    //Ersetze die Karten bei einem Set, wenn noch Karten vorhanden sind, oder lösche die gematchten, wenn keine mehr vorhanden sind
     mutating func updateCards() {
-    
-        cardsInGame.forEach{$0.isHinted = false}
+
+        newCards.removeAll()
         
         //Wenn ein Set vorliegt ersetze die gematchten Karten durch drei neue
         if successfulSetinGame {
-            successfulSetinGame = false
             
-            if cards.count > 0 && cardsInGame.count <= 12{
+            cardsInGame.forEach{$0.isHinted = false}
+        
+            //Wenn noch Karten im Deck sind, dann tausche sie aus
+            if cards.count > 0 {
                 
                 for card in selectedCards{
-                    let newCard = cards.remove(at: 0)
-                    newCard.isVisible = true
-                    cardsInGame[cardsInGame.firstIndex(of: card)!] = newCard
-                }
-            }else{
-                for card in selectedCards{
+                    matchingIndices.append(cardsInGame.firstIndex(of: card)!)
+                    print("Matching Indeices: \(matchingIndices)")
                     card.isVisible = false
                     card.isSelected = false
-                    cardsInGame.remove(at: cardsInGame.firstIndex(of: card)!)
-                }
-            }
-        }else{
-                for card in cardsInGame{
-                    card.isSelected = false
+                    
+                    //Wo liegt die aktuell gematchte Karte?
+                    let cardIndex = cardsInGame.firstIndex(of: card)
+                    
+                    //Hole eine neue Karte
+                    let newCard = cards.remove(at: 0)
+                    
+                    //Ersetze die alte gematchte Karte mit der neuen
+                    cardsInGame[cardIndex!] = newCard
+                    
+                    //Speichere die neuene KArten in diesem Array, damit im ViewController.swift geupdated werden kann
+                    newCards.append(newCard)
                 }
                 
-                for _ in 0...2{
-                    let card = cards.remove(at: 0)
-                    cardsInGame.append(card)
+                print("CARDS UPDATED at: \(matchingIndices)")
+                cardsInGame.forEach({print($0)})
+                print("\n")
+                
+            }else{
+                
+                for card in selectedCards{
+                    matchingIndices.append(cardsInGame.firstIndex(of: card)!)
                 }
+                
+                //Wenn keine Karten mehr im verfügbar sind. Die neuen KArten sollen die alten sein, nur ohne die ausgewählten Karten von vorhin
+                cardsInGame = cardsInGame.filter(){!selectedCards.contains($0)}
+            }
+            selectedCards.removeAll()
         }
+        //Nach dem Update ist kein Set vom User mehr im Game
+        successfulSetinGame = false
+        
+        //Suche mit den neuen Karten nach neuen Sets auf dem Tisch
         searchForSetOnDeck()
-        selectedCards.removeAll()
     }
+    
     
     //Erstellen eines neuen Spiels
     init(){
@@ -235,11 +277,16 @@ struct SetGame {
         
         //Am Anfang eines sollen nur 12 Karten auf dem Tisch liegen. Diese werden hier "ausgeteilt"
         for _ in 1...12 {
+            
             let card = cards.removeFirst()
             cardsInGame.append(card)
         }
+        newCards = cardsInGame
         cardsInGame.forEach(){$0.isVisible = true}
-        
         searchForSetOnDeck()
+        
+        print("GAME STARTED")
+        cardsInGame.forEach({print($0)})
+        print("\n")
     }
 }

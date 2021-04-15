@@ -8,18 +8,18 @@
 
 import Foundation
 
-class Card: Hashable, CustomStringConvertible {
-    
+class Card: Hashable, CustomStringConvertible, Equatable {
+
     var description: String{
         
         return "number: \(numberOfSigns); Sign: \(sign.shape); Shading: \(sign.shading); Color: \(sign.color)"
-        
     }
     
 
     var hashValue: Int {
         return identifier
     }
+    
     static func == (lhs: Card, rhs: Card) -> Bool {
         return lhs.identifier == rhs.identifier
     }
