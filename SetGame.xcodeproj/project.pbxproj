@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		1D189C4A25DC6E3B0038B1DD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D189C4925DC6E3B0038B1DD /* CardView.swift */; };
 		1D189C4D25DC6E550038B1DD /* CardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D189C4C25DC6E550038B1DD /* CardCellView.swift */; };
+		1D6F4C2D262C6C43002D94DA /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6F4C29262C6C43002D94DA /* ConcentrationViewController.swift */; };
+		1D6F4C2E262C6C43002D94DA /* ConcentrationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6F4C2A262C6C43002D94DA /* ConcentrationCard.swift */; };
+		1D6F4C2F262C6C43002D94DA /* ConcentrationThemeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6F4C2B262C6C43002D94DA /* ConcentrationThemeChooserViewController.swift */; };
+		1D6F4C30262C6C43002D94DA /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6F4C2C262C6C43002D94DA /* Concentration.swift */; };
 		1DEC722625F02E07005BE76E /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEC722525F02E07005BE76E /* Grid.swift */; };
 		1DF3BE262509531A004F35F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3BE252509531A004F35F0 /* AppDelegate.swift */; };
 		1DF3BE282509531A004F35F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3BE272509531A004F35F0 /* SceneDelegate.swift */; };
-		1DF3BE2A2509531A004F35F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3BE292509531A004F35F0 /* ViewController.swift */; };
+		1DF3BE2A2509531A004F35F0 /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF3BE292509531A004F35F0 /* SetGameViewController.swift */; };
 		1DF3BE2D2509531A004F35F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3BE2B2509531A004F35F0 /* Main.storyboard */; };
 		1DF3BE2F2509531C004F35F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3BE2E2509531C004F35F0 /* Assets.xcassets */; };
 		1DF3BE322509531C004F35F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DF3BE302509531C004F35F0 /* LaunchScreen.storyboard */; };
@@ -24,11 +28,15 @@
 /* Begin PBXFileReference section */
 		1D189C4925DC6E3B0038B1DD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1D189C4C25DC6E550038B1DD /* CardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellView.swift; sourceTree = "<group>"; };
+		1D6F4C29262C6C43002D94DA /* ConcentrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
+		1D6F4C2A262C6C43002D94DA /* ConcentrationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationCard.swift; sourceTree = "<group>"; };
+		1D6F4C2B262C6C43002D94DA /* ConcentrationThemeChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationThemeChooserViewController.swift; sourceTree = "<group>"; };
+		1D6F4C2C262C6C43002D94DA /* Concentration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		1DEC722525F02E07005BE76E /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		1DF3BE222509531A004F35F0 /* SetGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF3BE252509531A004F35F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DF3BE272509531A004F35F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1DF3BE292509531A004F35F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1DF3BE292509531A004F35F0 /* SetGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameViewController.swift; sourceTree = "<group>"; };
 		1DF3BE2C2509531A004F35F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1DF3BE2E2509531C004F35F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DF3BE312509531C004F35F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +57,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D6F4C32262C73D3002D94DA /* Concentration */ = {
+			isa = PBXGroup;
+			children = (
+				1D6F4C2C262C6C43002D94DA /* Concentration.swift */,
+				1D6F4C2A262C6C43002D94DA /* ConcentrationCard.swift */,
+				1D6F4C2B262C6C43002D94DA /* ConcentrationThemeChooserViewController.swift */,
+				1D6F4C29262C6C43002D94DA /* ConcentrationViewController.swift */,
+			);
+			path = Concentration;
+			sourceTree = "<group>";
+		};
+		1D6F4C34262C73E5002D94DA /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				1DF3BE292509531A004F35F0 /* SetGameViewController.swift */,
+				1DF3BE392509591A004F35F0 /* Card.swift */,
+				1DF3BE3B25095965004F35F0 /* CardSign.swift */,
+				1DF3BE3D25095B87004F35F0 /* SetGame.swift */,
+				1DEC722525F02E07005BE76E /* Grid.swift */,
+				1D189C4925DC6E3B0038B1DD /* CardView.swift */,
+				1D189C4C25DC6E550038B1DD /* CardCellView.swift */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		1D6F4C38262C741F002D94DA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1DF3BE252509531A004F35F0 /* AppDelegate.swift */,
+				1DF3BE272509531A004F35F0 /* SceneDelegate.swift */,
+				1DF3BE2B2509531A004F35F0 /* Main.storyboard */,
+				1DF3BE2E2509531C004F35F0 /* Assets.xcassets */,
+				1DF3BE302509531C004F35F0 /* LaunchScreen.storyboard */,
+				1DF3BE332509531C004F35F0 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		1DF3BE192509531A004F35F0 = {
 			isa = PBXGroup;
 			children = (
@@ -68,19 +114,9 @@
 		1DF3BE242509531A004F35F0 /* SetGame */ = {
 			isa = PBXGroup;
 			children = (
-				1DF3BE252509531A004F35F0 /* AppDelegate.swift */,
-				1DF3BE272509531A004F35F0 /* SceneDelegate.swift */,
-				1DF3BE292509531A004F35F0 /* ViewController.swift */,
-				1DF3BE2B2509531A004F35F0 /* Main.storyboard */,
-				1DF3BE2E2509531C004F35F0 /* Assets.xcassets */,
-				1DF3BE302509531C004F35F0 /* LaunchScreen.storyboard */,
-				1DF3BE332509531C004F35F0 /* Info.plist */,
-				1DF3BE392509591A004F35F0 /* Card.swift */,
-				1DF3BE3B25095965004F35F0 /* CardSign.swift */,
-				1DF3BE3D25095B87004F35F0 /* SetGame.swift */,
-				1DEC722525F02E07005BE76E /* Grid.swift */,
-				1D189C4925DC6E3B0038B1DD /* CardView.swift */,
-				1D189C4C25DC6E550038B1DD /* CardCellView.swift */,
+				1D6F4C32262C73D3002D94DA /* Concentration */,
+				1D6F4C34262C73E5002D94DA /* Set */,
+				1D6F4C38262C741F002D94DA /* Supporting Files */,
 			);
 			path = SetGame;
 			sourceTree = "<group>";
@@ -158,8 +194,12 @@
 			files = (
 				1D189C4A25DC6E3B0038B1DD /* CardView.swift in Sources */,
 				1DF3BE3C25095965004F35F0 /* CardSign.swift in Sources */,
+				1D6F4C2E262C6C43002D94DA /* ConcentrationCard.swift in Sources */,
+				1D6F4C30262C6C43002D94DA /* Concentration.swift in Sources */,
+				1D6F4C2D262C6C43002D94DA /* ConcentrationViewController.swift in Sources */,
+				1D6F4C2F262C6C43002D94DA /* ConcentrationThemeChooserViewController.swift in Sources */,
 				1D189C4D25DC6E550038B1DD /* CardCellView.swift in Sources */,
-				1DF3BE2A2509531A004F35F0 /* ViewController.swift in Sources */,
+				1DF3BE2A2509531A004F35F0 /* SetGameViewController.swift in Sources */,
 				1DF3BE262509531A004F35F0 /* AppDelegate.swift in Sources */,
 				1DF3BE282509531A004F35F0 /* SceneDelegate.swift in Sources */,
 				1DF3BE3E25095B87004F35F0 /* SetGame.swift in Sources */,
@@ -312,7 +352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A7AV2L6V3G;
-				INFOPLIST_FILE = SetGame/Info.plist;
+				INFOPLIST_FILE = "SetGame/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,7 +370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A7AV2L6V3G;
-				INFOPLIST_FILE = SetGame/Info.plist;
+				INFOPLIST_FILE = "SetGame/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

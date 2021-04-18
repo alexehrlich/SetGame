@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SetGameViewController: UIViewController {
     
     var game = SetGame()
     lazy var grid = Grid(layout: .aspectRatio(0.7), frame: cardArea.frame)
