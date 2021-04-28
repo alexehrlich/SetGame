@@ -73,13 +73,16 @@ class SetGameViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate(alongsideTransition: nil) { _ in
-            self.grid.frame = self.cardArea.frame
-            self.rearrangeCardViews(in: self.grid)
-            //Alle Karten neu zeichnen
-            self.visibleCardViews.forEach { (card) in
-                card.setNeedsDisplay()
+            
+            if self.tabBarController?.selectedIndex == 1{
+                self.grid.frame = self.cardArea.frame
+                self.rearrangeCardViews(in: self.grid)
+                //Alle Karten neu zeichnen
+                self.visibleCardViews.forEach { (card) in
+                    card.setNeedsDisplay()
+                }
+                self.updateViewFromModel()
             }
-            self.updateViewFromModel()
         }
     }
     

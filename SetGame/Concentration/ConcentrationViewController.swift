@@ -12,7 +12,7 @@ class ConcentrationViewController: UIViewController, UISplitViewControllerDelega
     
     
     //Hier wird eine Instanz eines Spiels erstellt --> Kartenstapel wird initialisiert. Diese Variable ist lazy, denn sie kann erst zu einem späteren Zeitpunkt bestimmt werden. Die Anzahl der Card Buttons ist nämlich noch nciht bekannt. Sobald diese bekannt ist, kann concentration initialisiert werden.
-    lazy var concentration = Concentration(numberOfPairedCards: cardButtons.count/2)
+    lazy var concentration = Concentration(numberOfPairedCards: visibleCardButtons.count/2)
     
     //Dieses Array enthällt alle "Themes" für das Spiel. Jede Zeile entspricht einem Theme.
     var emojiThemes = [
@@ -41,6 +41,18 @@ class ConcentrationViewController: UIViewController, UISplitViewControllerDelega
     var emojisForGame = [ConcentrationCard : String]()
     
     @IBOutlet private var cardButtons: [UIButton]! //Array von UIButton. Auf dieses kann mit UIButton zugegriffen werden.
+    
+    //Notwendig, wegen der SizeClass anpassung der Anzahl der CardButtons, damit immer nur die Sichtbaren verwendet werden
+    private var visibleCardButtons: [UIButton]! {
+        return cardButtons?.filter{ !$0.superview!.isHidden}
+    }
+    
+    //Aufgrund der oberen Zeilen, müssen die Card buttons dann aber auch immer gesetzt werden
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateViewFromModel()
+    }
+    
     @IBOutlet weak private var flipCountLabel: UILabel! {
         //Sobald UIKit die Variable zuweist, wird didSet aufgerufen, wenn die Connection von iOS zwischen View und Controller erstllt. Ist nötig, da die Attribute erst nach dem ersten Setzen in der App mit der lokalen Var gesetzt werden würden.
         didSet{
@@ -58,7 +70,7 @@ class ConcentrationViewController: UIViewController, UISplitViewControllerDelega
     @IBAction private func touchCard(_ sender: UIButton) {
         
         //Der Zugriff auf das Array mittles des Button (Sender) liefert einen Int? zurück. Wenn dieser nicht nil ist, dann...
-        if let cardNumber = cardButtons.firstIndex(of: sender) {
+        if let cardNumber = visibleCardButtons.firstIndex(of: sender) {
             
             //Überprüfe die Karte mit der Methode choseCards() der Klasse Concentration..
             concentration.chooseCards(at: cardNumber)
@@ -74,7 +86,7 @@ class ConcentrationViewController: UIViewController, UISplitViewControllerDelega
     
     //Diese Methode hält das Model und die View in Sync. Nach jeder ausgewählten KArte werdeb die Eigenschaften (isMatched, isFacUp..) aktualisiert. Diese Methode stellt diese Aktualisierung in der UI dar.
     private func updateViewFromModel(){
-        if cardButtons != nil {
+        if visibleCardButtons != nil {
             let attributes : [NSAttributedString.Key : Any] = [
                 .strokeWidth : 5,
                 .strokeColor : UIColor.darkGray
@@ -86,10 +98,10 @@ class ConcentrationViewController: UIViewController, UISplitViewControllerDelega
             scoreLabel.text = "Score: \(concentration.score)"
             
             //Es werden alle Idizes der vorhandenen Buttons durchgegangen. Es gibt genau so viele Card-Objekte wie es Card-Buttons gibt, das Spiel mit der Anzahl der Card-Buttons initialisiert wurde.
-            for index in cardButtons.indices {
+            for index in visibleCardButtons.indices {
                 
                 //Hier werden der Button und die Karte synchronisiert
-                let button = cardButtons[index]
+                let button = visibleCardButtons[index]
                 let card = concentration.cards[index]
                 
                 //Wenn die Karte faceUp ist, wird der Titel des Button
@@ -128,7 +140,7 @@ class ConcentrationViewController: UIViewController, UISplitViewControllerDelega
     @IBAction private func startNewGame(_ sender: UIButton) {
         
         //Initilaisiere ein neues Spiel. Alle Karten sind face down, score=0,flipCnt = 0
-        concentration = Concentration(numberOfPairedCards: cardButtons.count/2)
+        concentration = Concentration(numberOfPairedCards: visibleCardButtons.count/2)
         
         //Wähle das zufällige neue Them aus. randomElement() isz beu in Swift5
         chosenEmojiTheme = emojiThemes.randomElement()!
